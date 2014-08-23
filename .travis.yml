@@ -13,8 +13,6 @@ before_install:
         - for X in .deps/*; do rsync --remove-source-files -vaSHP -L "$X"/*/ "$X"/ || true; done
 install:
         - true
-after_install:
-        - true
 before_script:
         - true
 script:
