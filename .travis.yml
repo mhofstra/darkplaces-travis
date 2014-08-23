@@ -7,7 +7,7 @@ env:
         - PROJECT=xonotic
 before_install:
         - test `uname` != 'Linux' || sudo apt-get update -qq
-        - test `uname` != 'Linux' || sudo apt-get install -y gcc-mingw-w64 g++-mingw-w64
+        - test `uname` != 'Linux' || sudo apt-get install -y gcc-mingw-w64 g++-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 gcc-mingw-w64-i686 gcc-mingw-w64-x86-64
         - git archive --format=tar https://gitlab.com/xonotic/xonotic.git master misc/builddeps
         - git archive --format=tar --remote=git://de.git.xonotic.org/xonotic/xonotic.git --prefix=.deps/ master:misc/builddeps | tar xvf -
         - for X in .deps/*; do rsync --remove-source-files -vaSHP -L "$X"/*/ "$X"/ || true; done
