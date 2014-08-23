@@ -4,7 +4,7 @@ os=$1
 
 set -ex
 
-deps="deps/${os}"
+deps=".deps/${os}"
 
 case "${os}" in
 	linux32)
