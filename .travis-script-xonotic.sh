@@ -34,6 +34,7 @@ case "${os}" in
 		;;
 esac
 
+trap 'make clean' EXIT
 eval "make ${makeflags} ${maketargets}"
 mkdir "output.${os}"
 mv ${outputs} "output.${os}"/
