@@ -32,6 +32,6 @@ case "$os" in
 		;;
 esac
 
-make ${makeflags} ${maketargets}
+eval "make ${makeflags} ${maketargets}"
 mkdir "output.${os}"
 mv ${outputs} "output.${os}"/
