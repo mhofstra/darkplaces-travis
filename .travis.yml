@@ -1,7 +1,8 @@
 language: cpp
+os:
+        - linux
 compiler:
         - gcc
-#       - clang
 env:
         - PROJECT=xonotic
 before_install:
