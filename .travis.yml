@@ -1,0 +1,30 @@
+language: cpp
+compiler:
+        - gcc
+#       - clang
+env:
+        - PROJECT=xonotic
+before_install:
+        - [ `uname` != 'Linux' ] || sudo apt-get update -qq
+        - [ `uname` != 'Linux' ] || sudo apt-get install -y mingw-w64
+        - git archive --format=tar https://gitlab.com/xonotic/xonotic.git master misc/builddeps
+        - git archive --format=tar --remote=git://de.git.xonotic.org/xonotic/xonotic.git --prefix=.deps/ master:misc/builddeps | tar xvf -
+        - for X in .deps/*; do rsync --remove-source-files -vaSHP -L "$X"/*/ "$X"/ || true; done
+install:
+        - true
+after_install:
+        - true
+before_script:
+        - true
+script:
+        - [ `uname` != 'Linux' ] || "./.travis-script-${PROJECT}.sh" linux32
+        - [ `uname` != 'Linux' ] || "./.travis-script-${PROJECT}.sh" linux64
+        - [ `uname` != 'Linux' ] || "./.travis-script-${PROJECT}.sh" win32
+        - [ `uname` != 'Linux' ] || "./.travis-script-${PROJECT}.sh" win64
+        - [ `uname` != 'Darwin' ] || "./.travis-script-${PROJECT}.sh" osx
+after_success:
+        - "./.travis-after_success-${PROJECT}.sh"
+after_failure:
+        - true
+after_script:
+        - true
