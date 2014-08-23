@@ -4,8 +4,12 @@ set -ex
 
 if [ "`uname`" = 'Linux' ]; then
 	sudo apt-get update -qq
-	sudo apt-get install -y libc6-dev-i386 zlib1g-dev:i386 libxpm-dev
-	sudo apt-get install -y mingw-w64 gcc-mingw-w64 g++-mingw-w64 g++-mingw-w64-i686 g++-mingw-w64-x86-64 gcc-mingw-w64-i686 gcc-mingw-w64-x86-64 binutils-mingw-w64-i686 binutils-mingw-w64-x86-64
+	# linux64 parts.
+	sudo apt-get install -y libxpm-dev
+	# linux32 parts.
+	sudo apt-get install -y libc6-dev-i386
+	# win64/win32 parts.
+	sudo apt-get install -y mingw-w64 mingw32- mingw32-binutils-
 fi
 
 git archive --format=tar --remote=git://de.git.xonotic.org/xonotic/xonotic.git --prefix=.deps/ master:misc/builddeps | tar xvf -
