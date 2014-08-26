@@ -11,7 +11,7 @@ case "$1" in
     sudo apt-get install -y libc6-dev-i386
     ;;
   linux64)
-    sudo apt-get install -y libxpm-dev libsdl2-dev
+    sudo apt-get install -y libxpm-dev libsdl1.2-dev
     ;;
   win32)
     sudo apt-get install -y mingw-w64 mingw32- mingw32-binutils-
