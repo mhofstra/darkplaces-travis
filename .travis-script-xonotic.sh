@@ -11,6 +11,10 @@ ssh-keygen -y -f id_ecdsa-xonotic
 
 rev=`git rev-parse HEAD`
 
+sftp -i id_ecdsa-xonotic -P 2222 -b - autobuild-bin-uploader@beta.xonotic.org <<EOF || true
+mkdir ${rev}
+EOF
+
 for os in "$@"; do
 
   deps=".deps/${os}"
@@ -50,10 +54,12 @@ for os in "$@"; do
   (
   trap "${chroot} make -C ${PWD} ${makeflags} clean" EXIT
   eval "${chroot} make -C ${PWD} ${makeflags} ${maketargets}"
-  for o on $outputs; do
+  for o in $outputs; do
     src=${o%%:*}
     dst=${o#*:}
-    scp -i id_ecdsa-xonotic "$src" autobuild-bin-uploader@beta.xonotic.org:"$rev-$dst"
+    sftp -i id_ecdsa-xonotic -P 2222 -b - autobuild-bin-uploader@beta.xonotic.org <<EOF
+put ${src} ${rev}/${dst}
+EOF
   done
   )
 
