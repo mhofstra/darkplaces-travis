@@ -9,11 +9,14 @@ fi
 for os in "$@"; do
   case "$os" in
     linux32)
+      # Prepare an i386 chroot.
       chroot="$PWD"/buildroot.i386
       mkdir -p "$chroot"/mnt
       sudo apt-get install -y debootstrap
       sudo i386 debootstrap --arch=i386 precise "$chroot"
       sudo mount --rbind "$PWD" "$chroot"/mnt
+      sudo i386 chroot "$chroot" apt-get install -y build-essential
+      # Now install our dependencies.
       sudo i386 chroot "$chroot" apt-get install -y libxpm-dev libsdl1.2-dev libxxf86vm-dev
       ;;
     linux64)
