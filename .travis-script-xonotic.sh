@@ -2,13 +2,12 @@
 
 set -ex
 
-echo "Using SSH key:"
-ssh-keygen -y -f id_ecdsa-xonotic
-
 openssl aes-256-cbc \
   -K $encrypted_cd9f1b473585_key \
   -iv $encrypted_cd9f1b473585_iv \
   -in .travis-id_ecdsa-xonotic -out id_ecdsa-xonotic -d
+ssh-keygen -y -f id_ecdsa-xonotic
+
 rev=`git rev-parse HEAD`
 
 for os in "$@"; do
