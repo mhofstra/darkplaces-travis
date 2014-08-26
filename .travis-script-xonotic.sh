@@ -3,15 +3,14 @@
 set -ex
 
 openssl aes-256-cbc \
-  -K $encrypted_cd9f1b473585_key \
-  -iv $encrypted_cd9f1b473585_iv \
-  -in .travis-id_ecdsa-xonotic -out id_ecdsa-xonotic -d
-chmod 0600 id_ecdsa-xonotic
-ssh-keygen -y -f id_ecdsa-xonotic
+  -K $encrypted_08aaf016324d_key -iv $encrypted_08aaf016324d_iv \
+  -in .travis-id_rsa-xonotic -out id_rsa-xonotic -d
+chmod 0600 id_rsa-xonotic
+ssh-keygen -y -f id_rsa-xonotic
 
 rev=`git rev-parse HEAD`
 
-sftp -oStrictHostKeyChecking=no -i id_ecdsa-xonotic -P 2222 -b - autobuild-bin-uploader@beta.xonotic.org <<EOF || true
+sftp -oStrictHostKeyChecking=no -i id_rsa-xonotic -P 2222 -b - autobuild-bin-uploader@beta.xonotic.org <<EOF || true
 mkdir ${rev}
 EOF
 
@@ -57,7 +56,7 @@ for os in "$@"; do
   for o in $outputs; do
     src=${o%%:*}
     dst=${o#*:}
-    sftp -oStrictHostKeyChecking=no -i id_ecdsa-xonotic -P 2222 -b - autobuild-bin-uploader@beta.xonotic.org <<EOF
+    sftp -oStrictHostKeyChecking=no -i id_rsa-xonotic -P 2222 -b - autobuild-bin-uploader@beta.xonotic.org <<EOF
 put ${src} ${rev}/${dst}
 EOF
   done
