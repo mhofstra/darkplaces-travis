@@ -1,27 +1,23 @@
 language: cpp
-os:
-        - linux
-        - osx
-compiler:
-        - gcc
-env:
-        - PROJECT=xonotic
+matrix:
+        include:
+#               - os: linux
+#                 env: PROJECT=xonotic OS="linux32"
+#                 compiler: gcc
+                - os: linux
+                  env: PROJECT=xonotic OS="linux64 win32 win64"
+                  compiler: gcc
+                - os: osx
+                  env: PROJECT=xonotic OS="osx"
+                  compiler: gcc
 before_install:
-        - # test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" linux32
-        - test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" linux64
-        - test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" win32
-        - test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" win64
-        - test `uname` != 'Darwin' || "./.travis-before_install-${PROJECT}.sh" osx
+        - "./.travis-before_install-${PROJECT}.sh" $OS
 install:
         - true
 before_script:
         - true
 script:
-        - # test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" linux32
-        - test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" linux64
-        - test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" win32
-        - test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" win64
-        - test `uname` != 'Darwin' || "./.travis-script-${PROJECT}.sh" osx
+        - "./.travis-script-${PROJECT}.sh" $OS
 after_success:
         - true
 after_failure:
