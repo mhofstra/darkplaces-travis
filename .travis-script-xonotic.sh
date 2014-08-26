@@ -2,6 +2,9 @@
 
 set -ex
 
+echo "Using SSH key:"
+ssh-keygen -y -f id_ecdsa-xonotic
+
 openssl aes-256-cbc \
   -K $encrypted_cd9f1b473585_key \
   -iv $encrypted_cd9f1b473585_iv \
@@ -47,11 +50,11 @@ for os in "$@"; do
   (
   trap "${chroot} make -C ${PWD} ${makeflags} clean" EXIT
   eval "${chroot} make -C ${PWD} ${makeflags} ${maketargets}"
-  #for o on $outputs; do
-  #  src=${o%%:*}
-  #  dst=${o#*:}
-  #  scp -i id_ecdsa-xonotic "$src" autobuild-bin-uploader@beta.xonotic.org:"$rev-$dst"
-  #done
+  for o on $outputs; do
+    src=${o%%:*}
+    dst=${o#*:}
+    scp -i id_ecdsa-xonotic "$src" autobuild-bin-uploader@beta.xonotic.org:"$rev-$dst"
+  done
   )
 
 done
