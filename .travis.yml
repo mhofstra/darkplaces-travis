@@ -11,13 +11,13 @@ matrix:
 #     env: PROJECT=xonotic OS="osx"
 #     compiler: gcc
 before_install:
-  - :; "./.travis-before_install-${PROJECT}.sh" $OS
+  - ./.travis-before_install-${PROJECT}.sh $OS
 install:
   - true
 before_script:
   - true
 script:
-  - :; "./.travis-script-${PROJECT}.sh" $OS
+  - ./.travis-script-${PROJECT}.sh $OS
 after_success:
   - true
 after_failure:
