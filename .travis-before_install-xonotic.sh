@@ -11,10 +11,10 @@ for os in "$@"; do
     linux32)
       # Prepare an i386 chroot.
       chroot="$PWD"/buildroot.i386
-      mkdir -p "$chroot"/mnt
+      mkdir -p "$chroot$PWD"
       sudo apt-get install -y debootstrap
       sudo i386 debootstrap --arch=i386 precise "$chroot"
-      sudo mount --rbind "$PWD" "$chroot"/mnt
+      sudo mount --rbind "$PWD" "$chroot$PWD"
       sudo i386 chroot "$chroot" apt-get install -y build-essential
       # Now install our dependencies.
       sudo i386 chroot "$chroot" apt-get install -y libxpm-dev libsdl1.2-dev libxxf86vm-dev
