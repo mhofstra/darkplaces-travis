@@ -9,7 +9,6 @@ fi
 for os in "$@"; do
   case "$os" in
     linux32)
-      sudo dpkg --add-architecture i386
       sudo apt-get install -y libc6-dev-i386 libxpm-dev:i386 libsdl1.2-dev:i386 libxxf86vm-dev:i386 libglu1-mesa-dev:i386 libxext-dev:i386 libglu1-mesa:i386 libgl1-mesa-dev:i386
       ;;
     linux64)
