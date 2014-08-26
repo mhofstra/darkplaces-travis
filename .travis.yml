@@ -1,18 +1,23 @@
 language: cpp
 os:
         - linux
+        - osx
 compiler:
         - gcc
 env:
         - PROJECT=xonotic
 before_install:
-        - ./.travis-before_install-${PROJECT}.sh
+        - # test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" linux32
+        - test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" linux64
+        - test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" win32
+        - test `uname` != 'Linux' || "./.travis-before_install-${PROJECT}.sh" win64
+        - test `uname` != 'Darwin' || "./.travis-before_install-${PROJECT}.sh" osx
 install:
         - true
 before_script:
         - true
 script:
-        - test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" linux32
+        - # test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" linux32
         - test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" linux64
         - test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" win32
         - test `uname` != 'Linux' || "./.travis-script-${PROJECT}.sh" win64
