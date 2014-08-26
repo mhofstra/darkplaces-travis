@@ -1,6 +1,4 @@
 language: cpp
-env:
-- secure: aaa
 matrix:
   include:
   - os: linux
