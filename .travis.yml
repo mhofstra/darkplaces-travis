@@ -4,12 +4,6 @@ matrix:
     - os: linux
       env: PROJECT=xonotic OS="linux32"
       compiler: gcc
-#   - os: linux
-#     env: PROJECT=xonotic OS="linux64 win32 win64"
-#     compiler: gcc
-#   - os: osx
-#     env: PROJECT=xonotic OS="osx"
-#     compiler: gcc
 before_install:
   - "./.travis-before_install-${PROJECT}.sh" $OS
 install:
