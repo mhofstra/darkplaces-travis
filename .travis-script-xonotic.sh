@@ -44,7 +44,7 @@ for os in "$@"; do
       ;;
     osx)
       chroot=
-      makeflags='STRIP=: CC="gcc -g1 -arch i386 -arch ppc -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.4 -I../../../${deps}/include -L../../../${deps}/lib -DSUPPORTIPV6" DP_LINK_ZLIB=shared DP_LINK_JPEG=dlopen DP_LINK_ODE=dlopen DP_LINK_CRYPTO=dlopen DP_LINK_CRYPTO_RIJNDAEL=dlopen'
+      makeflags='STRIP=: CC="gcc -g1 -arch i386 -mmacosx-version-min=10.5 -I../../../${deps}/include -L../../../${deps}/lib -DSUPPORTIPV6" DP_LINK_ZLIB=shared DP_LINK_JPEG=dlopen DP_LINK_ODE=dlopen DP_LINK_CRYPTO=dlopen DP_LINK_CRYPTO_RIJNDAEL=dlopen'
       maketargets='sv-release sdl-release'
       outputs='darkplaces-sdl:xonotic-osx-sdl-bin darkplaces-dedicated:xonotic-osx-dedicated'
       ;;
