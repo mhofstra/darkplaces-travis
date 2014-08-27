@@ -20,13 +20,13 @@ for os in "$@"; do
   case "${os}" in
     linux32)
       chroot="sudo chroot ${PWD}/buildroot.i386"
-      makeflags='STRIP=: CC="${CC} -m32 -march=i686 -g1 -I../../../${deps}/include -L../../../${deps}/lib -DSUPPORTIPV6" LIB_JPEG=../../../${deps}/lib/libjpeg.a LIB_CRYPTO="../../../${deps}/lib/libd0_blind_id.a ../../../${deps}/lib/libgmp.a" DP_LINK_ZLIB=shared DP_LINK_JPEG=dlopen DP_LINK_ODE=dlopen DP_LINK_CRYPTO=shared DP_LINK_CRYPTO_RIJNDAEL=dlopen'
+      makeflags='STRIP=: CC="${CC} -m32 -march=i686 -g1 -I../../../${deps}/include -L../../../${deps}/lib -DSUPPORTIPV6" SDL_CONFIG=sdl2-config LIB_JPEG=../../../${deps}/lib/libjpeg.a LIB_CRYPTO="../../../${deps}/lib/libd0_blind_id.a ../../../${deps}/lib/libgmp.a" DP_LINK_ZLIB=shared DP_LINK_JPEG=dlopen DP_LINK_ODE=dlopen DP_LINK_CRYPTO=shared DP_LINK_CRYPTO_RIJNDAEL=dlopen'
       maketargets='release'
       outputs='darkplaces-glx:xonotic-linux32-glx darkplaces-sdl:xonotic-linux32-sdl darkplaces-dedicated:xonotic-linux32-dedicated'
       ;;
     linux64)
       chroot=
-      makeflags='STRIP=: CC="${CC} -m64 -g1 -I../../../${deps}/include -L../../../${deps}/lib -DSUPPORTIPV6" LIB_JPEG=../../../${deps}/lib/libjpeg.a LIB_CRYPTO="../../../${deps}/lib/libd0_blind_id.a ../../../${deps}/lib/libgmp.a" DP_LINK_ZLIB=shared DP_LINK_JPEG=dlopen DP_LINK_ODE=dlopen DP_LINK_CRYPTO=shared DP_LINK_CRYPTO_RIJNDAEL=dlopen'
+      makeflags='STRIP=: CC="${CC} -m64 -g1 -I../../../${deps}/include -L../../../${deps}/lib -DSUPPORTIPV6" SDL_CONFIG=sdl2-config LIB_JPEG=../../../${deps}/lib/libjpeg.a LIB_CRYPTO="../../../${deps}/lib/libd0_blind_id.a ../../../${deps}/lib/libgmp.a" DP_LINK_ZLIB=shared DP_LINK_JPEG=dlopen DP_LINK_ODE=dlopen DP_LINK_CRYPTO=shared DP_LINK_CRYPTO_RIJNDAEL=dlopen'
       maketargets='release'
       outputs='darkplaces-glx:xonotic-linux64-glx darkplaces-sdl:xonotic-linux64-sdl darkplaces-dedicated:xonotic-linux64-dedicated'
       ;;

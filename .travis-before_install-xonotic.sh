@@ -21,10 +21,26 @@ for os in "$@"; do
       # Now install our dependencies.
       sudo i386 chroot "$chroot" apt-get install -y \
         libxpm-dev libsdl1.2-dev libxxf86vm-dev
+      wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
+      tar xf SDL2-2.0.3.tar.gz
+      (
+      cd SDL2-2.0.3
+      ./configure --enable-static --disable-shared
+      make
+      sudo make install
+      )
       ;;
     linux64)
       sudo apt-get install -y \
         libxpm-dev libsdl1.2-dev libxxf86vm-dev
+      wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
+      tar xf SDL2-2.0.3.tar.gz
+      (
+      cd SDL2-2.0.3
+      ./configure --enable-static --disable-shared
+      make
+      sudo make install
+      )
       ;;
     win32)
       sudo apt-get install -y \
@@ -42,5 +58,5 @@ done
 git archive --format=tar --remote=git://de.git.xonotic.org/xonotic/xonotic.git \
   --prefix=.deps/ master:misc/builddeps | tar xvf -
 for X in .deps/*; do
-  rsync --remove-source-files -vaSHP -L "$X"/*/ "$X"/ || true
+  rsync --remove-source-files -aL "$X"/*/ "$X"/ || true
 done
