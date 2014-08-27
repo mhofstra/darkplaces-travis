@@ -25,9 +25,9 @@ for os in "$@"; do
       tar xf SDL2-2.0.3.tar.gz
       (
       cd SDL2-2.0.3
-      ./configure --enable-static --disable-shared
-      make
-      sudo make install
+      sudo i386 chroot "$chroot" sh -c "cd $PWD && ./configure --enable-static --disable-shared"
+      sudo i386 chroot "$chroot" make -C "$PWD"
+      sudo i386 chroot "$chroot" make -C "$PWD" install
       )
       ;;
     linux64)
